@@ -26,6 +26,7 @@ class Avada_Social_Sharing extends Avada_Social_Icon {
 	 * Renders all social icons not belonging to shortcodes.
 	 *
 	 * @since 3.5.0
+	 * @access public
 	 * @param  array $args Holding all necessarry data for social icons.
 	 * @return string  The HTML mark up for social icons, incl. wrapping container.
 	 */
@@ -100,18 +101,19 @@ class Avada_Social_Sharing extends Avada_Social_Icon {
 	/**
 	 * Set up the array for sharing box social networks.
 	 *
+	 * @access public
 	 * @since 3.5.0
 	 * @param  array $args Holding all necessarry data for social icons.
 	 * @return array  The social links array containing the social media and links to them.
 	 */
-	function get_sharingbox_social_links_array( $args ) {
+	public function get_sharingbox_social_links_array( $args ) {
 
 		$social_links_array = array();
 
 		if ( Avada()->settings->get( 'sharing_facebook' ) ) {
 
 			if ( ! avada_jetpack_is_mobile() ) {
-				$facebook_url = 'http://www.facebook.com/sharer.php?u=' . rawurlencode( $args['link'] ) . '&t=' . rawurlencode( $args['title'] );
+				$facebook_url = 'https://www.facebook.com/sharer.php?u=' . rawurlencode( $args['link'] ) . '&t=' . rawurlencode( $args['title'] );
 			} else {
 				$facebook_url = 'https://m.facebook.com/sharer.php?u=' . $args['link'] . '&t=' . rawurlencode( $args['title'] );
 			}
@@ -165,7 +167,7 @@ class Avada_Social_Sharing extends Avada_Social_Icon {
 
 		if ( Avada()->settings->get( 'sharing_email' ) ) {
 			$social_links_array['email'] = array(
-				'url'        => 'mailto:?subject=' . $args['title'] . '&body=' . $args['link'],
+				'url'        => 'mailto:?subject=' . rawurlencode( $args['title'] ) . '&body=' . $args['link'],
 			);
 		}
 
@@ -177,10 +179,11 @@ class Avada_Social_Sharing extends Avada_Social_Icon {
 	 * Set up the array for author page social networks.
 	 *
 	 * @since 3.5.0
+	 * @access public
 	 * @param  array $args Holding all necessarry data for social icons.
 	 * @return array  The social links array containing the social media and links to them.
 	 */
-	function get_authorpage_social_links_array( $args ) {
+	public function get_authorpage_social_links_array( $args ) {
 
 		$social_links_array = array();
 
